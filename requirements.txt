@@ -7,3 +7,4 @@ python-dotenv
 streamlit-star-ratings
 sentence-transformers
 transformers
+faiss-cpu
