@@ -4,3 +4,4 @@ langchain-community
 langchain-groq
 langchain-openai
 python-dotenv
+streamlit-star-ratings
