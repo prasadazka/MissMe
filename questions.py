@@ -7,6 +7,12 @@ from personality_builder import generate_personality_template
 def load_questions(json_path="personality_questions.json"):
     with open(json_path, "r", encoding="utf-8") as f:
         return json.load(f)["personality_questions"]
+    
+import streamlit as st
+import os
+from pathlib import Path
+
+
 
 def render_questionnaire_tab():
     st.header("💬 Create Your Loved One's Memory")
