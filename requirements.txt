@@ -7,3 +7,4 @@ python-dotenv
 elevenlabs
 streamlit-star-ratings
 sentence-transformers
+faiss-cpu
