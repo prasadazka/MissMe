@@ -7,7 +7,7 @@ import re
 from utils import list_available_characters
 from star_ratings import star_ratings
 from rag_builder import build_rag_index, load_rag_documents,load_retriever
-from emotion_detector import detect_emotion
+#from emotion_detector import detect_emotion
 from voice_emotion_clone import synthesize_emotional_voice,render_voice_upload_tab
 
 
