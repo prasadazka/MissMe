@@ -26,10 +26,16 @@ def render_voice_upload_tab():
     upload_dir = "uploaded_voices"
     Path(upload_dir).mkdir(parents=True, exist_ok=True)
 
-    uploaded_file = st.file_uploader("📁 Upload voice file", type=["wav", "mp3", "m4a", "ogg"])
+    uploaded_file = st.file_uploader("📁 Upload voice file", type=["wav", "mp3"])
+
     if uploaded_file:
         file_path = os.path.join(upload_dir, uploaded_file.name)
-    return file_path
+        with open(file_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        return file_path
+    else:
+        return None  # ✅ avoids UnboundLocalError
+
 
     
 
