@@ -83,35 +83,36 @@ def detect_emotion(text):
 
 
 # Clone and generate emotional voice
-def synthesize_emotional_voice(input_voice_path, input_text,character_id):
+import os
+
+def synthesize_emotional_voice(input_voice_path, input_text, character_id):
     """
     Clones the voice from the input file and synthesizes the input text with emotion.
-
-    Args:
-        input_voice_path (str): Path to the uploaded voice file.
-        input_text (str): The input text to synthesize.
-
-    Returns:
-        str: Path to the generated MP3 file.
+    Returns the generated audio file path.
     """
 
-    # Clone voice
+    # ✅ Step 1: Validate input_voice_path
+    if not input_voice_path or not isinstance(input_voice_path, str) or not os.path.exists(input_voice_path):
+        raise ValueError("❌ input_voice_path is invalid or file does not exist.")
+
+    # ✅ Step 2: Clone voice
+    base_name = os.path.basename(input_voice_path)
     voice = elevenlabs_client.clone(
-        name="JP_Cloned_Voice",
-        description=f"Cloned from {os.path.basename(input_voice_path)}",
+        name=f"{character_id}_Cloned_Voice",
+        description=f"Cloned from {base_name}",
         files=[input_voice_path]
     )
     voice_id = voice.voice_id
     print(f"[✓] Cloned voice ID: {voice_id}")
 
-    # Detect emotion
+    # ✅ Step 3: Detect emotion from input text
     emotion = detect_emotion(input_text)
     print(f"[INFO] Detected emotion: {emotion}")
 
-    # Get emotion settings
+    # ✅ Step 4: Get emotion settings
     settings = emotion_voice_map.get(emotion, {"stability": 0.5, "similarity_boost": 0.85})
 
-    # Generate speech
+    # ✅ Step 5: Generate voice with emotion
     audio = elevenlabs_client.text_to_speech.convert(
         text=input_text,
         voice_id=voice_id,
@@ -120,7 +121,7 @@ def synthesize_emotional_voice(input_voice_path, input_text,character_id):
         voice_settings=settings
     )
 
-    # Save to file
+    # ✅ Step 6: Save the output
     output_path = f"{character_id}_{emotion}.mp3"
     with open(output_path, "wb") as f:
         for chunk in audio:
