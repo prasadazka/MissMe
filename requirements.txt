@@ -6,3 +6,4 @@ langchain-openai
 python-dotenv
 elevenlabs
 streamlit-star-ratings
+sentence-transformers
