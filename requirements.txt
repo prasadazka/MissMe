@@ -5,3 +5,4 @@ langchain-groq
 langchain-openai
 python-dotenv
 elevenlabs
+streamlit-star-ratings
